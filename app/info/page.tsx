@@ -5,7 +5,7 @@ export default function Information() {
         Information
       </h1>
       <p className="text-lg text-gray-700">
-        Information about you goes here.
+        Information about me goes here.
       </p>
     </div>
   )

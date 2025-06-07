@@ -5,7 +5,7 @@ export default function Writing() {
         Writing
       </h1>
       <p className="text-lg text-gray-700">
-        Your writing and blog posts go here.
+        My writing and blog posts go here.
       </p>
     </div>
   )
