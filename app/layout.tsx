@@ -17,7 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="min-h-screen flex flex-col">
         {/* Navbar */}
-        <header className="pt-8 md:pt-16 md:w-1/2 pb-16 px-4 md:px-0 flex justify-between max-w-7xl mx-auto w-1/2 sm:w-full lg:w-1/2 xl:w-1/3 w-full">
+        <header className="pt-8 md:pt-16 md:w-1/2 pb-16 px-4 md:px-0 flex justify-between max-w-7xl mx-auto w-full sm:w-full lg:w-1/2 xl:w-2/5 2xl:w-1/4 ">
           <Link href="/">
             <h1 className="text-base font-mono font-semibold text-black">vrg.</h1>
           </Link>
