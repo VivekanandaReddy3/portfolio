@@ -1,12 +1,10 @@
 export default function Page() {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-12">
-      <h1 className="text-4xl font-bold text-gray-900 mb-6">
-        Hallo I am Vivek
-      </h1>
-      <p className="text-lg text-gray-700">
-        My writing and blog posts go here.
-      </p>
-    </div>
+    <h1 className="font-semibold text-4xl mb-4 text-slate-950">
+          Ciao, I’m Vivek.
+          <span className="block text-slate-500 font-normal text-2xl">
+            A Web and Data Science Student in Germany.
+          </span>
+        </h1>
   )
 }
