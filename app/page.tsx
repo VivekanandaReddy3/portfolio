@@ -32,9 +32,13 @@ export default function Page() {
 </div>
     </section>
     <section>
-      <h3>
+      <h4 className="mx-auto text-left font-medium text-2xl mb-4 text-slate-950 md:w-1/2 lg:w-1/2 xl:w-2/5 2xl:w-1/4 px-4">
         Personal Projects
-      </h3>
+      </h4>
+
+      <p className="text-slate-700 text-lg mx-auto text-left font-normal mb-4 md:w-1/2 lg:w-1/2 xl:w-2/5 2xl:w-1/4 px-4 ">
+        Below is a selection of projects that I&apos;ve worked on.
+      </p>
     </section>
     </main>
     
