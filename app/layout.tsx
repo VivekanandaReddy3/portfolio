@@ -49,7 +49,7 @@ export default function RootLayout({
         </main>
 
         {/* Footer */}
-        <footer className="bg-[#f9fafd]  px-6 py-6">
+        <footer className="flex justify-between mx-auto  bg-[#f9fafd]  px-6 py-6 md:w-1/2 max-w-7xl w-full sm:w-full lg:w-1/2 xl:w-2/5 2xl:w-1/4">
 
           <div className="max-w-7xl mx-auto">
             {/* Horizontal Line */}
@@ -59,7 +59,7 @@ export default function RootLayout({
             <div className="flex justify-between items-center text-sm text-gray-600">
               <span>© 2020 - 2025 / Vivekananda Reddy</span>
               <Link 
-                href="https://github.com/yourusername" 
+                href="https://github.com/vivekanandareddy3" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="hover:text-gray-900 transition-colors"
