@@ -29,7 +29,7 @@ const contact: {
 export default function Contact() {
   return (
     
-    <main>
+    <main className="px-4">
       <h1 className="mx-auto text-left font-medium text-4xl mb-4 text-slate-950 md:w-1/2 lg:w-1/2 xl:w-2/5 2xl:w-1/4">
         Contact
         <div className="h-px bg-slate-300 my-6" />
