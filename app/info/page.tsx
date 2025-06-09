@@ -30,6 +30,14 @@ export default function Information() {
           <Link href="mailto:vivekanandareddygodala@gmail.com" className="font-normal underline text-slate-950">vivekanandareddygodala@gmail.com</Link>.
         </p>
       </div>
+
+      <Link
+      href="/resume.pdf"
+      target="_blank"
+      className="block my-8 text-slate-500 text-sm font-medium"
+      >
+        Download resume →
+      </Link>
       
       </section>
     </main>
