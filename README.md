@@ -1,7 +1,7 @@
 # My Professional Portfolio
 
 ✨ **About This Project**  
-This repository currently serves as the foundation for my upcoming professional portfolio website. I'm actively building it using Next.js to showcase my skills, projects, and journey in web development.
+This repository currently serves as the foundation for my upcoming professional portfolio website. I'm actively building it using Next.js to showcase my skills, projects, and journey.
 
 ---
 
