@@ -1,5 +1,41 @@
 import Link from "next/link";
 
+
+
+const projects: {
+  href?: string;
+  title: string;
+  description: string;
+  image: string;
+}[] = [
+{
+    title: 'Startup Directory',
+    href: 'https://github.com/VivekanandaReddy3/SU_Directory',
+    description: 'Pitch and explore startup ideas collaboratively.',
+    image: '/comingsoon.png',
+  },
+  {
+    title: 'Quotient',
+    href: 'https://github.com/VivekanandaReddy3/Quotient',
+    description: 'Modern admin dashboard with GraphQL and Refine.',
+    image: '/quotient.png',
+  },
+  {
+    title: 'SalesLytic',
+    href: 'https://github.com/VivekanandaReddy3/Saleslytic',
+    description: 'Sales insights dashboard using Tableau and SQL.',
+    image: '/saleslytic.png',
+  },
+  {
+    title: 'AdminPit',
+    href: 'https://github.com/VivekanandaReddy3/AdmitPit',
+    description: 'Admin dashboard with charts and management tools.',
+    image: '/adminpit.png',
+  },
+];
+
+
+
 export default function Page() {
   return (
     <main>
@@ -36,9 +72,14 @@ export default function Page() {
         Personal Projects
       </h4>
 
-      <p className="text-slate-700 text-lg mx-auto text-left font-normal mb-4 md:w-1/2 lg:w-1/2 xl:w-2/5 2xl:w-1/4 px-4 ">
+      <p className="text-slate-700 text-lg mx-auto text-left font-light mb-4 md:w-1/2 lg:w-1/2 xl:w-2/5 2xl:w-1/4 px-4 ">
         Below is a selection of projects that I&apos;ve worked on.
       </p>
+
+      
+
+
+
     </section>
     </main>
     
