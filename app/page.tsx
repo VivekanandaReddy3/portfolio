@@ -1,4 +1,6 @@
 import Link from "next/link";
+import Image from "next/image";
+import { clsx } from "clsx";
 
 
 
@@ -76,9 +78,46 @@ export default function Page() {
         Below is a selection of projects that I&apos;ve worked on.
       </p>
 
-      
+      <div>
+        <div>
+          
+        </div>
+      </div>
 
+     <div className="grid sm:w-4/5 2xl:w-[40%] w-2/3 mx-auto md:grid-cols-2 grid-cols-1 gap-8 pt-15" >
+       {projects.map((project) => {
+            const isLink = !!project.href;
+            const WrappingComponent = isLink ? Link : 'div';
 
+            return (
+              <WrappingComponent
+                href={project.href ?? '/'}
+                key={project.title}
+                className={clsx(
+                  'flex flex-col justify-center bg-slate-100 hover:bg-slate-200/70 transition-colors rounded-xl p-8'
+                )}
+              >
+                <div className="relative rounded-xl mb-4 shadow-project">
+                  <Image
+                    width={450}
+                    height={240}
+                    quality={90}
+                    src={project.image}
+                    alt=""
+                    className="rounded-xl bg-cover"
+                  />
+                </div>
+                <h3 className="text-slate-700 font-semibold tracking-tight text-xl">
+                  {project.title}
+                </h3>
+                <h3 className="text-slate-500 text-base">
+                  {project.description}
+                </h3>
+              </WrappingComponent>
+            );
+          })}
+     </div>
+     
 
     </section>
     </main>
