@@ -45,3 +45,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
 }
+
+.font-mono {
+  font-family: var(--font-monospace), ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+}
