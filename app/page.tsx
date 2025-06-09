@@ -14,7 +14,7 @@ const projects: {
     title: 'Startup Directory',
     href: 'https://github.com/VivekanandaReddy3/SU_Directory',
     description: 'Pitch and explore startup ideas collaboratively.',
-    image: '/comingsoon.png',
+    image: '/sud.png',
   },
   {
     title: 'Quotient',
@@ -30,7 +30,7 @@ const projects: {
   },
   {
     title: 'AdminPit',
-    href: 'https://github.com/VivekanandaReddy3/AdmitPit',
+    href: 'https://github.com/VivekanandaReddy3/AdminPit',
     description: 'Admin dashboard with charts and management tools.',
     image: '/adminpit.png',
   },

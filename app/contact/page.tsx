@@ -16,7 +16,7 @@ const contact: {
     label: '@vvkrdy',
   },
   {
-    method: 'GitHub',
+    method: 'Github',
     link: 'https://github.com/vivekanandareddy3',
     label: 'git/vivekanandareddy',
   },
@@ -45,7 +45,7 @@ export default function Contact() {
                 <Title as="h2" variant="tertiary">
                   {contactMethod.method}
                 </Title>
-                <Link href={contactMethod.link} className="text-slate-700">
+                <Link href={contactMethod.link} className="text-slate-700 font-light underline">
                   {contactMethod.label}
                 </Link>
                 </div>

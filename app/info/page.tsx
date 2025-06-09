@@ -8,7 +8,7 @@ export default function Information() {
         Information 
         <div className="h-px bg-slate-300 my-6" />
       </h1>
-      <div className="mx-auto md:w-1/2 lg:w-1/2 xl:w-2/5 2xl:w-1/4 prose prose-lg text-slate-600 leading-loose space-y-7 font-light text-lg">
+      <div className="mx-auto md:w-1/2 lg:w-1/2 xl:w-2/5 2xl:w-1/4 prose prose-lg text-slate-700 leading-loose space-y-7 font-normal text-lg">
         <p>
           Hey, I’m Vivekananda Reddy Godala, a computer and data science grad from India now chasing my master’s in Germany. I’m all about building tech that solves real problems, and I’m hungry to learn and grow in the process.
         </p>
@@ -34,7 +34,7 @@ export default function Information() {
       <Link
       href="/resume.pdf"
       target="_blank"
-      className="block my-8 text-slate-500 text-sm font-medium"
+      className="block my-8 text-slate-500 text-sm font-medium mx-auto md:w-1/2 lg:w-1/2 xl:w-2/5 2xl:w-1/4 "
       >
         Download resume →
       </Link>
