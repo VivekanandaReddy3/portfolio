@@ -35,7 +35,7 @@ export default function Contact() {
         Contact
         <div className="h-px bg-slate-300 my-6" />
         <span className="block text-slate-900 font-light text-xl">
-          If you'd like to get in touch, you can reach me using the following methods. 
+          If you’d like to get in touch, you can reach me using the following methods. 
         </span>
       </h1>
       <section>
