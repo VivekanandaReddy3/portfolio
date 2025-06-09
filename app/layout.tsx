@@ -13,8 +13,8 @@ const JetBrainsMonoFont = JetBrains_Mono({
 
 
 export const metadata: Metadata = {
-  title: 'Vivekananda Reddy - Portfolio',
-  description: 'Portfolio website of Vivekananda Reddy',
+  title: 'Vivekananda Reddy',
+  description: 'Software Developer | Passionate about code, design & problem-solving | Germany.',
 icons: {
     icon: '/favicon.ico', // Add this to reference the favicon
   },
