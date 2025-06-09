@@ -15,6 +15,10 @@ const JetBrainsMonoFont = JetBrains_Mono({
 export const metadata: Metadata = {
   title: 'Vivekananda Reddy - Portfolio',
   description: 'Portfolio website of Vivekananda Reddy',
+icons: {
+    icon: '/favicon.ico', // Add this to reference the favicon
+  },
+  
 }
 
 export default function RootLayout({
@@ -24,6 +28,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+
       <body className={`${JetBrainsMonoFont.variable}`}>
         {/* Navbar */}
         <header className="pt-8 md:pt-16 md:w-2/3 pb-16 px-4 md:px-0 flex justify-between max-w-7xl mx-auto w-full sm:w-full lg:w-1/2 xl:w-2/5 2xl:w-1/4">
