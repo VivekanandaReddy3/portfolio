@@ -24,7 +24,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`min-h-screen flex flex-col ${JetBrainsMonoFont.variable}`}>
+      <body className={`${JetBrainsMonoFont.variable}`}>
         {/* Navbar */}
         <header className="pt-8 md:pt-16 md:w-2/3 pb-16 px-4 md:px-0 flex justify-between max-w-7xl mx-auto w-full sm:w-full lg:w-1/2 xl:w-2/5 2xl:w-1/4">
           <Link href="/">
@@ -58,20 +58,20 @@ export default function RootLayout({
         </main>
 
         {/* Footer */}
-        <footer className="flex justify-between mx-auto  bg-[#f9fafd]  px-6 py-6 md:w-1/2 max-w-7xl w-full sm:w-full lg:w-1/2 xl:w-2/5 2xl:w-1/4 font-mono">
+        <footer className="py-7 md:w-2/3 w-full sm:w-full lg:w-1/2 xl:w-2/5 2xl:w-1/4 mx-auto sm:px-2">
 
-          <div className="max-w-7xl mx-auto">
+          <div className=" mx-auto">
             {/* Horizontal Line */}
             <hr className="border-gray-300 mb-4" />
             
             {/* Footer Content */}
             <div className="flex justify-between items-center text-sm text-gray-600">
-              <span>© 2020 - 2025 / Vivekananda Reddy</span>
+              <span className='font-mono'>© 2020 - 2025 / Vivekananda Reddy</span>
               <Link 
                 href="https://github.com/vivekanandareddy3" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="hover:text-gray-900 transition-colors"
+                className="hover:text-gray-900 transition-colors font-mono"
               >
                 GitHub
               </Link>

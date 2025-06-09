@@ -56,7 +56,7 @@ export default function Page() {
       <div className="mx-auto md:w-1/2 lg:w-1/2 xl:w-2/5 2xl:w-1/4 flex">
         <Link
           href="/info"
-          className="group bg-slate-950 hover:bg-slate-800 transition-colors mt-4 font-mono text-xs font-semibold rounded-full px-8 py-3 text-white text-left"
+          className="group bg-slate-950 hover:bg-slate-800 transition-colors mt-4 font-mono text-xs font-light rounded-full px-8 py-3 text-white text-left"
         >
           More Information{' '}
           <span className="inline-block group-hover:translate-x-2 transition-transform">
@@ -79,7 +79,7 @@ export default function Page() {
       </p>
 
       
-     <div className="grid sm:w-4/5 2xl:w-[40%] xl:w-[70%] w-2/3 mx-auto md:grid-cols-2 grid-cols-1 gap-8 pt-15" >
+     <div className="grid sm:w-4/5 2xl:w-[40%] xl:w-[70%] w-2/3 mx-auto md:grid-cols-2 grid-cols-1 gap-8 pt-12" >
        {projects.map((project) => {
             const isLink = !!project.href;
             const WrappingComponent = isLink ? Link : 'div';
@@ -112,10 +112,10 @@ export default function Page() {
             );
           })}
      </div>
-     <div className="mx-auto md:w-1/2 lg:w-1/2 xl:w-2/5 2xl:w-1/4 flex mt-5">
+     <div className="mx-auto md:w-1/2 lg:w-1/2 xl:w-2/5 2xl:w-1/4 flex mt-5 px-4">
         <Link
           href="https://github.com/VivekanandaReddy3?tab=repositories"
-          className="group bg-slate-950 hover:bg-slate-800 transition-colors mt-4 font-mono text-xs font-semibold rounded-full px-8 py-3 text-white text-left"
+          className="group bg-slate-950 hover:bg-slate-800 transition-colors mt-4 font-mono text-xs font-light rounded-full px-8 py-3 text-white text-left"
         >
           More Projects{' '}
           <span className="inline-block group-hover:translate-x-2 transition-transform">
