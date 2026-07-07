@@ -1,17 +1,76 @@
-export default function Writing() {
-  return (
-    <section className="sm:px-4">
-      <h1 className="mx-auto text-left font-medium text-4xl mb-4 text-slate-950 md:w-1/2 lg:w-1/2 xl:w-2/5 2xl:w-1/4">
-       Writing
-      </h1>
-      <p className="text-lg mb-2 mx-auto text-left md:w-1/2 lg:w-1/2 xl:w-2/5 2xl:w-1/4">🚧 Under construction.</p>
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { getAllPosts } from '@/lib/articles';
 
-      <p className="text-base mb-4 mx-auto md:w-1/2 lg:w-1/2 xl:w-2/5 2xl:w-1/4">
-         Be back soon. I’m currently building this section with MDX support.
-      </p>
-      
+export const metadata: Metadata = {
+  title: 'Writing',
+  description: 'Notes on things I build, learn and think about.',
+};
+
+const formatDate = (date: string) =>
+  new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(new Date(date));
+
+export default async function Writing() {
+  const posts = await getAllPosts({});
+
+  return (
+    <section className="container-page">
+      <h1
+        className="reveal mb-4 text-4xl font-medium text-slate-950"
+        style={{ '--stagger': 0 } as React.CSSProperties}
+      >
+        Writing
+        <span className="mt-1 block text-xl font-light text-slate-500">
+          Notes on things I build, learn and think about.
+        </span>
+      </h1>
+
+      <div
+        className="reveal my-8 h-px bg-slate-200"
+        style={{ '--stagger': 1 } as React.CSSProperties}
+      />
+
+      {posts.length === 0 ? (
+        <p
+          className="reveal text-lg text-slate-500"
+          style={{ '--stagger': 2 } as React.CSSProperties}
+        >
+          Nothing here yet — the first post is on its way.
+        </p>
+      ) : (
+        <div className="flex flex-col">
+          {posts.map((post, i) => (
+            <Link
+              key={post.slug}
+              href={post.href}
+              className="group reveal -mx-4 flex flex-col gap-1 rounded-xl px-4 py-6 transition-colors duration-300 hover:bg-slate-100"
+              style={{ '--stagger': i + 2 } as React.CSSProperties}
+            >
+              <time
+                dateTime={post.date}
+                className="font-mono text-xs text-slate-400"
+              >
+                {formatDate(post.date)}
+              </time>
+              <h2 className="text-xl font-medium tracking-tight text-slate-950">
+                {post.meta.title}
+                <span className="ml-2 inline-block text-slate-300 transition-all duration-300 group-hover:translate-x-1 group-hover:text-slate-600">
+                  →
+                </span>
+              </h2>
+              {post.meta.summary && (
+                <p className="text-base leading-relaxed text-slate-500">
+                  {post.meta.summary}
+                </p>
+              )}
+            </Link>
+          ))}
+        </div>
+      )}
     </section>
-    
-    
-  )
+  );
 }

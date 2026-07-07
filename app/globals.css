@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --breakpoint-sm: 320px;
@@ -16,36 +17,98 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-saans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-saans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-monospace), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+/* Single source of truth for page alignment — header, footer and
+   every page section share this column. */
+@utility container-page {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 42rem;
+  padding-inline: 1.5rem;
+}
+
+/* Wider column for breakout content like the project grid. */
+@utility container-wide {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 58rem;
+  padding-inline: 1.5rem;
 }
 
 @layer utilities {
-  .shadow-project {
-    box-shadow: 
-      0 2px 12px rgba(0, 0, 0, 0.02),
-      0 4px 8px rgba(0, 0, 0, 0.03),
-      0 2px 4px rgba(0, 0, 0, 0.04),
-      0 1px 2px rgba(0, 0, 0, 0.05),
-      0 1px rgba(0, 0, 0, 0.06),
-      0 0 0 8px rgba(0, 0, 0, 0.02),
-      0 24px 48px rgba(0, 0, 0, 0.08);
+  .shadow-card {
+    box-shadow:
+      0 1px 2px rgba(15, 23, 42, 0.04),
+      0 4px 12px rgba(15, 23, 42, 0.04);
+  }
+  .shadow-card-hover {
+    box-shadow:
+      0 2px 4px rgba(15, 23, 42, 0.05),
+      0 12px 32px rgba(15, 23, 42, 0.1);
   }
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Staggered entrance — set `--stagger: n` inline to offset the delay. */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(3px);
   }
-} */
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.reveal {
+  animation: reveal 0.7s cubic-bezier(0.21, 0.47, 0.32, 0.98) both;
+  animation-delay: calc(var(--stagger, 0) * 90ms);
+}
+
+/* Animated underline for inline links and nav items. */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+}
+
+.link-underline:hover,
+.link-underline[data-active="true"] {
+  background-size: 100% 1px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+  }
+  *,
+  ::before,
+  ::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+::selection {
+  background: #0f172a;
+  color: #fbfcff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
-}
-
-.font-mono {
-  font-family: var(--font-monospace), ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }

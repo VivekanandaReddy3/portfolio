@@ -16,8 +16,16 @@ export const getRegexForSlug = (slug: string): RegExp => {
   return new RegExp(`^\\d{4}-\\d{2}-\\d{2}-${slug}.mdx$`);
 };
 
-const POSTS_PATH = 'posts';
-const WORK_PATH = 'projects';
+const POSTS_PATH = path.join(process.cwd(), 'posts');
+const WORK_PATH = path.join(process.cwd(), 'projects');
+
+const getFilenames = (isWork?: boolean): string[] => {
+  const dir = isWork ? WORK_PATH : POSTS_PATH;
+  if (!fs.existsSync(dir)) {
+    return [];
+  }
+  return fs.readdirSync(dir);
+};
 
 interface DateAndSlug {
   date: string;
@@ -78,7 +86,7 @@ const getPostFromFile = (filename: string, isWork?: boolean): Post | null => {
  * @returns The post with the given slug, or null if no such post exists.
  */
 export const getPostBySlug = (slug: string, isWork?: boolean): Post | null => {
-  const files = fs.readdirSync(path.join(isWork ? WORK_PATH : POSTS_PATH));
+  const files = getFilenames(isWork);
 
   for (const filename of files) {
     if (getRegexForSlug(slug).test(filename)) {
@@ -103,7 +111,7 @@ export const getAllPosts = async ({
   includeDrafts?: boolean;
   isWork?: boolean;
 }): Promise<Post[]> => {
-  const files = fs.readdirSync(path.join(isWork ? WORK_PATH : POSTS_PATH));
+  const files = getFilenames(isWork);
 
   const posts: Post[] = files
     .map((item) => getPostFromFile(item, isWork))

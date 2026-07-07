@@ -1,0 +1,22 @@
+---
+title: 'Finishing what I started: this writing section'
+summary: 'This page said "under construction" for over a year. Here is how it finally got built, and what I fixed along the way.'
+---
+
+For a long time this page was a single line of text: *🚧 Under construction.* I had installed the MDX libraries, written the helper functions, and then… stopped. The classic developer move — the plumbing was done, but no water ever ran through it.
+
+This week I finally finished it. Posts are plain `.mdx` files in a folder, named like `2026-07-07-my-post.mdx`. The date comes from the filename, the title and summary come from the frontmatter, and [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote) renders the body inside the App Router with zero client-side JavaScript.
+
+## What else got fixed
+
+Once I was in the codebase, the list grew:
+
+- The project cards on the home page used screenshots with four different aspect ratios, so the grid never lined up. They now sit in fixed `aspect-video` frames with `object-cover`.
+- The site shipped a beautiful variable font — and never loaded it. The `@font-face` is now wired up through `next/font`.
+- The Tailwind typography plugin was configured in a file that Tailwind v4 doesn't even read. Prose styling silently did nothing.
+
+## Why write at all
+
+Mostly to think more clearly. Writing something down forces you to notice the parts you don't actually understand yet. If a post here helps someone else along the way, that's a bonus.
+
+More soon.

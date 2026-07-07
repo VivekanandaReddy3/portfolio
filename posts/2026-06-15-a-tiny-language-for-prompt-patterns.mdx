@@ -1,0 +1,16 @@
+---
+title: 'A tiny language for prompt patterns'
+summary: 'For a Software Language Engineering course I built a small #lang in Racket that turns reusable prompt templates into a real, checked language.'
+---
+
+For the Software Language Engineering course at the University of Koblenz, I built a small domain-specific language in [Racket](https://racket-lang.org/): `#lang prompt-pattern`. The idea is simple — prompt templates for language models are usually stored as loose strings with ad-hoc placeholders. Nothing checks them. Rename a variable and every template that used it breaks silently at runtime.
+
+A DSL fixes that. In `prompt-pattern`, a template is a language construct: its placeholders are declared, filled slots are checked, and a missing or misspelled variable is an *error at compile time*, not a malformed prompt at 2 a.m.
+
+## Why Racket
+
+Racket is built for exactly this. A `#lang` line hands you the whole front end of a language: the **reader** turns source text into syntax objects, and the **expander** rewrites your constructs into ordinary Racket via macros. You get a full toolchain — parsing, error reporting, editor support — without writing a parser generator or an interpreter loop from scratch.
+
+The lesson that stuck with me: the hard part of language engineering isn't parsing. It's deciding *what should be impossible to express*. Every check the language does for you is a class of bugs nobody has to debug again.
+
+The code is on [GitHub](https://github.com/VivekanandaReddy3/sle-prompt-pattern) if you want to poke at it.
