@@ -47,7 +47,7 @@ export default function Contact() {
         style={{ '--stagger': 0 } as React.CSSProperties}
       />
       <p
-        className="reveal mb-10 text-xl font-light text-slate-700"
+        className="reveal mb-10 font-serif text-xl text-slate-500 italic md:text-2xl"
         style={{ '--stagger': 1 } as React.CSSProperties}
       >
         If you’d like to get in touch, you can reach me using the following

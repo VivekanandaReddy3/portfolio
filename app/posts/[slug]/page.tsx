@@ -68,7 +68,7 @@ export default async function PostPage({ params }: Props) {
           {post.meta.title}
         </h1>
         {post.meta.summary && (
-          <p className="mt-3 text-xl font-light text-slate-500">
+          <p className="mt-3 font-serif text-xl text-slate-500 italic md:text-2xl">
             {post.meta.summary}
           </p>
         )}

@@ -24,8 +24,8 @@ export default async function Writing() {
         style={{ '--stagger': 0 } as React.CSSProperties}
       >
         Writing
-        <span className="mt-1 block text-xl font-light text-slate-500">
-          Notes on things I build, learn and think about.
+        <span className="mt-2 block font-serif text-xl font-normal text-slate-500 italic md:text-2xl">
+          notes on things I build, learn and think about.
         </span>
       </h1>
 

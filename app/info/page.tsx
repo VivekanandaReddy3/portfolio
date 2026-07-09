@@ -47,9 +47,10 @@ export default function Information() {
           innovation every day.
         </p>
         <p>
-          I’m pumped for Werkstudent roles in Germany to gain experience and
-          contribute to cool projects. Got something for me? Feel free to reach
-          out to me here: <br />
+          Since September 2025, I’m a working student at 1&amp;1 Mail &amp;
+          Media in Karlsruhe, doing DevOps and cloud automation — learning how
+          software runs reliably at real scale. Got something interesting?
+          Feel free to reach out to me here: <br />
           <Link
             href="mailto:vivekanandareddygodala@gmail.com"
             className="link-underline font-normal !no-underline text-slate-950"
@@ -60,11 +61,47 @@ export default function Information() {
         </p>
       </div>
 
+      <div
+        className="reveal mt-12"
+        style={{ '--stagger': 2 } as React.CSSProperties}
+      >
+        <p className="mb-4 font-mono text-[11px] tracking-[0.2em] text-slate-400 uppercase">
+          Now
+        </p>
+        <dl className="flex flex-col gap-3 text-base">
+          <div className="flex flex-col gap-0.5 md:flex-row md:gap-6">
+            <dt className="w-32 shrink-0 font-mono text-xs leading-6 text-slate-400">
+              Working
+            </dt>
+            <dd className="text-slate-700">
+              DevOps &amp; Cloud Automation at 1&amp;1 Mail &amp; Media,
+              Karlsruhe
+            </dd>
+          </div>
+          <div className="flex flex-col gap-0.5 md:flex-row md:gap-6">
+            <dt className="w-32 shrink-0 font-mono text-xs leading-6 text-slate-400">
+              Studying
+            </dt>
+            <dd className="text-slate-700">
+              M.Sc. Web &amp; Data Science, University of Koblenz
+            </dd>
+          </div>
+          <div className="flex flex-col gap-0.5 md:flex-row md:gap-6">
+            <dt className="w-32 shrink-0 font-mono text-xs leading-6 text-slate-400">
+              Building
+            </dt>
+            <dd className="text-slate-700">
+              A platform for startups to pitch ideas and team up
+            </dd>
+          </div>
+        </dl>
+      </div>
+
       <Link
         href="/resume.pdf"
         target="_blank"
-        className="group reveal my-8 inline-block font-mono text-sm font-medium text-slate-500 transition-colors hover:text-slate-950"
-        style={{ '--stagger': 2 } as React.CSSProperties}
+        className="group reveal mt-10 mb-8 inline-block font-mono text-sm font-medium text-slate-500 transition-colors hover:text-slate-950"
+        style={{ '--stagger': 3 } as React.CSSProperties}
       >
         Download resume{' '}
         <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">

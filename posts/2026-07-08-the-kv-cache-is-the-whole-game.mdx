@@ -1,0 +1,36 @@
+---
+title: 'The KV cache is the whole game'
+summary: 'Why agents get slow and expensive has little to do with model size — it is cache invalidation. Prompt caching mechanics quietly explain half the architecture of every serious agent harness.'
+---
+
+An agent is a loop: the model reads the transcript, acts, a result gets appended, repeat. Which means a 50-turn agent doesn't read its context once — it re-reads *everything, every turn*. Grow to a 100k-token transcript and a naive harness will push several **million** input tokens through the model for one task. Quadratic growth, hiding in a while-loop.
+
+The reason this is affordable at all is a transformer implementation detail that most people building on top of LLMs never look at: the **KV cache**.
+
+## Sixty seconds of mechanics
+
+Transformers generate one token at a time, and each new token attends to every token before it. To do that, every previous token contributes a key and a value tensor per attention layer. Recomputing those for the whole prefix on every step would be absurd — so inference engines compute them once and cache them. That's the KV cache.
+
+The property that matters downstream: the cached tensors for a token depend only on the tokens *before* it. Identical prefix, identical cache. Which is why providers can sell it back to you as **prompt caching**: on the Claude API, writing a cache prefix costs 1.25× normal input price, but a cache *hit* costs a tenth of it — and the cache lives for about five minutes, refreshed every time it's used.
+
+From this, one brutal rule: **the cache is valid up to the first token that differs, and dead after it.** Change one character at position 500 of your system prompt and you just re-bought everything from position 500 on.
+
+## Everything downstream of one rule
+
+That single invalidation rule silently dictates how every good agent harness is built. Once you know it, you see it everywhere:
+
+**Transcripts are append-only.** Editing history — rewriting an earlier message, collapsing old turns in place — invalidates every token after the edit. Harnesses that "clean up" context mid-conversation pay full price for the entire remainder, every turn after. If you must compact, you accept one deliberate full re-read and rebuild the prefix.
+
+**Volatile data sinks to the bottom.** A timestamp at the *top* of a system prompt is a self-inflicted 10× cost increase: every request differs at token ten, so nothing ever hits cache. Same for request IDs, shuffled examples, or a "current status" block up front. Stable content first, dynamic content last — the prompt is a sediment column.
+
+**Serialization must be deterministic.** Tool schemas are serialized ahead of the messages. If your framework emits tools in hash-map order, or a JSON serializer doesn't sort keys, two logically identical requests differ at some early byte — and the cache silently never hits. Nothing errors. You just pay 10× and wonder why.
+
+**Timers respect the TTL.** An agent that polls a CI job every 6 minutes re-reads its entire context cold each time; polling at 4.5 minutes keeps the prefix warm. The *cache window* — not politeness — is why well-built agents pick the sleep intervals they do.
+
+**Sub-agents are context hygiene, not just parallelism.** When a task needs 80k tokens of exploratory file-reading, doing it in the main loop means those tokens live in the prefix forever — re-read (even at cache price) on every subsequent turn until the task ends. Spawn a sub-agent instead: it burns its own context, returns a 500-token summary, and the main transcript stays lean. The hierarchy of agents that looks like an org chart is really a cache-line diagram.
+
+## The arithmetic that sells it
+
+Take a 100k-token context and 50 turns. Naive: roughly 100k × 50 = 5M full-price input tokens. Cached: you write ~100k once at 1.25×, and the other 49 reads cost a tenth each — call it ~615k token-equivalents. That's an 8× cost difference *and* the latency difference between "reading 100k tokens" and "reading the 2k new ones," for identical output. No model change, no prompt cleverness. Just respecting one invalidation rule.
+
+People keep asking which model to use. More often the leverage is here: inference at scale is a systems problem, and the KV cache is its unit of account. If your agent feels slow and expensive, the first question isn't "is the model smart enough" — it's "where did I break my prefix?"

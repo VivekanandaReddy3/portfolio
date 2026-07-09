@@ -1,0 +1,38 @@
+---
+title: 'MCP is not a plugin system'
+summary: 'Everyone treats Model Context Protocol like USB for APIs. But tools are only one of six primitives — and the protocol is really a contract about control, not connectivity.'
+---
+
+Ask ten developers what MCP is and nine will say some version of "a standard way to give the model access to my API." That mental model works well enough to ship a demo — and it misses what the protocol actually designs.
+
+Here is the part almost nobody says out loud: **the model never calls anything.** A language model emits tokens. When it "uses a tool," it emits a structured block of text; the *host application* parses that block, decides whether to execute it, runs the call, and appends the result — as more tokens — back into the context. The MCP server never talks to the model at all. It talks to a client, over JSON-RPC 2.0, via stdio or streamable HTTP. Everything the model knows about your server, it knows because someone serialized it into its context window.
+
+Once you see that, the design questions change completely. MCP isn't about connecting things. It's about deciding **who controls what** — and that's encoded in the protocol's primitives.
+
+## The trichotomy that 99% skip
+
+A server can expose three kinds of things, and they differ not in shape but in *who decides when they're used*:
+
+- **Tools** are *model-controlled*. The model decides, mid-conversation, to call them. This is the only primitive most integrations ever implement.
+- **Resources** are *application-controlled*. The host decides which documents, files, or records to attach to context. The model doesn't ask — it receives.
+- **Prompts** are *user-controlled*. Parameterized templates a human explicitly invokes — slash commands, essentially.
+
+This matters because the failure mode of real-world MCP servers is cramming everything into the model-controlled bucket. A `get_user_profile` that the app should have attached as a resource. A `summarize_thread` that should have been a user-invoked prompt. Every one of those becomes a decision the model has to make — and a schema it has to read first.
+
+## The arrow that points backwards
+
+The protocol also defines primitives that flow from server to client, and this is where it stops looking like a plugin system entirely. **Sampling** lets a *server* request a completion *from the client's* model. Your server can be agentic — it can think — without owning an API key, without picking a model, without seeing the user's other context. The host mediates, and the human stays in the loop. **Elicitation** flips another arrow: the server can pause mid-operation and ask the user a structured question. **Roots** let the client declare which parts of a filesystem a server should treat as in-scope.
+
+Intelligence flows *toward* the server on the host's terms. That inversion is the protocol's most interesting idea, and I have seen exactly zero "getting started with MCP" tutorials mention it.
+
+## Every schema is a tax
+
+The other thing the plugin mental model hides: tool definitions aren't registration, they're *prompt injection you pay for on every request*. Each tool's name, description, and JSON schema is serialized into the context window before the conversation even starts. Connect a server with forty tools and you've spent thousands of tokens per request — before the user types a word — and, worse, you've degraded the model's ability to pick the *right* tool, because tool selection accuracy drops as the tool list grows.
+
+So the actual craft of writing an MCP server is context economics:
+
+1. **Fewer, higher-level tools.** `search_and_summarize_orders` beats five chained CRUD endpoints — every intermediate result of a chain flows through the context window as tokens.
+2. **Descriptions are prompt engineering.** The description field is the only documentation the model will ever read. Write it for a reader who will act on it, including when *not* to use the tool.
+3. **Defer what you can.** Mature harnesses now load tool schemas on demand — search first, load the schema, then call. If your server exposes its surface area gradually, it composes; if it dumps everything, it competes.
+
+If all you build is tools, you're using MCP as an adapter, and an OpenAPI spec would have done the job. The protocol's real subject is a negotiation: what enters the context, who pays for it, and who gets to decide. That's not plumbing. That's the interesting part of the whole agent stack.

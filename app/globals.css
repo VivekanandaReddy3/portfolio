@@ -19,6 +19,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-saans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-monospace), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-serif: var(--font-newsreader), Georgia, 'Times New Roman', serif;
 }
 
 /* Single source of truth for page alignment — header, footer and
@@ -70,6 +71,24 @@
   animation-delay: calc(var(--stagger, 0) * 90ms);
 }
 
+/* Scroll-triggered reveal — a client component flips `data-visible`
+   when the element enters the viewport. */
+.sr {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: blur(3px);
+  transition:
+    opacity 0.8s cubic-bezier(0.21, 0.47, 0.32, 0.98),
+    transform 0.8s cubic-bezier(0.21, 0.47, 0.32, 0.98),
+    filter 0.8s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+}
+
+.sr[data-visible='true'] {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
 /* Animated underline for inline links and nav items. */
 .link-underline {
   background-image: linear-gradient(currentColor, currentColor);
@@ -88,6 +107,11 @@
   .reveal {
     animation: none;
   }
+  .sr {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
   *,
   ::before,
   ::after {
@@ -99,6 +123,12 @@
 ::selection {
   background: #0f172a;
   color: #fbfcff;
+}
+
+:focus-visible {
+  outline: 2px solid #0f172a;
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 html {
