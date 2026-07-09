@@ -135,6 +135,12 @@ html {
   scroll-behavior: smooth;
 }
 
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

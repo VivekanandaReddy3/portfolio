@@ -12,6 +12,12 @@ export interface Post {
   content: string;
 }
 
+/** Estimated reading time in minutes at ~200 wpm. */
+export const getReadingTime = (content: string): number => {
+  const words = content.trim().split(/\s+/).length;
+  return Math.max(1, Math.round(words / 200));
+};
+
 export const getRegexForSlug = (slug: string): RegExp => {
   return new RegExp(`^\\d{4}-\\d{2}-\\d{2}-${slug}.mdx$`);
 };

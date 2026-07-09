@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import Link from 'next/link';
 import './globals.css';
 import { JetBrains_Mono, Newsreader } from 'next/font/google';
@@ -35,9 +35,6 @@ export const metadata: Metadata = {
     template: `%s — ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
-  icons: {
-    icon: '/favicon.ico',
-  },
   openGraph: {
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
@@ -55,6 +52,10 @@ export const metadata: Metadata = {
       'application/rss+xml': '/feed.xml',
     },
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: '#fbfcff',
 };
 
 export default function RootLayout({

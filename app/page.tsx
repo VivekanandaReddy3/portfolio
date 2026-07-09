@@ -167,16 +167,26 @@ function ProjectCard({
 }) {
   const cardContent = (
     <>
-      <div className="relative aspect-video overflow-hidden rounded-lg bg-slate-200">
-        <Image
-          src={project.image}
-          alt={`Screenshot of ${project.title}`}
-          fill
-          sizes="(min-width: 640px) 28rem, 100vw"
-          quality={90}
-          priority={priority}
-          className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-        />
+      <div className="flex aspect-video flex-col overflow-hidden rounded-lg border border-slate-200/80 bg-white">
+        <div className="flex h-6 shrink-0 items-center gap-1.5 border-b border-slate-100 bg-slate-50 px-2.5">
+          <span className="h-2 w-2 rounded-full bg-slate-200" />
+          <span className="h-2 w-2 rounded-full bg-slate-200" />
+          <span className="h-2 w-2 rounded-full bg-slate-200" />
+          <span className="ml-2 hidden truncate font-mono text-[9px] text-slate-300 sm:block">
+            {project.title.toLowerCase().replace(/\s/g, '')}.app
+          </span>
+        </div>
+        <div className="relative flex-1 bg-slate-200">
+          <Image
+            src={project.image}
+            alt={`Screenshot of ${project.title}`}
+            fill
+            sizes="(min-width: 640px) 28rem, 100vw"
+            quality={90}
+            priority={priority}
+            className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+          />
+        </div>
       </div>
       <div className="flex items-baseline justify-between px-1 pt-4">
         <h3 className="text-lg font-semibold tracking-tight text-slate-800">

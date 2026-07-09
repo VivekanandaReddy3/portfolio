@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { getAllPosts } from '@/lib/articles';
+import { getAllPosts, getReadingTime } from '@/lib/articles';
 
 export const metadata: Metadata = {
   title: 'Writing',
@@ -50,12 +50,11 @@ export default async function Writing() {
               className="group reveal -mx-4 flex flex-col gap-1 rounded-xl px-4 py-6 transition-colors duration-300 hover:bg-slate-100"
               style={{ '--stagger': i + 2 } as React.CSSProperties}
             >
-              <time
-                dateTime={post.date}
-                className="font-mono text-xs text-slate-400"
-              >
-                {formatDate(post.date)}
-              </time>
+              <p className="font-mono text-xs text-slate-400">
+                <time dateTime={post.date}>{formatDate(post.date)}</time>
+                <span className="mx-2">·</span>
+                {getReadingTime(post.content)} min read
+              </p>
               <h2 className="text-xl font-medium tracking-tight text-slate-950">
                 {post.meta.title}
                 <span className="ml-2 inline-block text-slate-300 transition-all duration-300 group-hover:translate-x-1 group-hover:text-slate-600">

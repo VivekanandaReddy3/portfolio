@@ -2,7 +2,12 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
-import { getAllPostPaths, getPostBySlug } from '@/lib/articles';
+import {
+  getAllPostPaths,
+  getAllPosts,
+  getPostBySlug,
+  getReadingTime,
+} from '@/lib/articles';
 import { KvCacheDemo } from '@/app/components/kv-cache-demo';
 
 const mdxComponents = { KvCacheDemo };
@@ -56,6 +61,11 @@ export default async function PostPage({ params }: Props) {
     notFound();
   }
 
+  const posts = await getAllPosts({});
+  const index = posts.findIndex((p) => p.slug === slug);
+  const newer = index > 0 ? posts[index - 1] : null;
+  const older = index < posts.length - 1 ? posts[index + 1] : null;
+
   return (
     <article className="container-page">
       <Link
@@ -73,12 +83,11 @@ export default async function PostPage({ params }: Props) {
         className="reveal mb-10"
         style={{ '--stagger': 1 } as React.CSSProperties}
       >
-        <time
-          dateTime={post.date}
-          className="font-mono text-xs text-slate-400"
-        >
-          {formatDate(post.date)}
-        </time>
+        <p className="font-mono text-xs text-slate-400">
+          <time dateTime={post.date}>{formatDate(post.date)}</time>
+          <span className="mx-2">·</span>
+          {getReadingTime(post.content)} min read
+        </p>
         <h1 className="mt-2 text-4xl font-medium tracking-tight text-slate-950">
           {post.meta.title}
         </h1>
@@ -96,6 +105,45 @@ export default async function PostPage({ params }: Props) {
       >
         <MDXRemote source={post.content} components={mdxComponents} />
       </div>
+
+      {(older || newer) && (
+        <nav
+          aria-label="More posts"
+          className="mt-16 grid gap-4 border-t border-slate-200 pt-8 sm:grid-cols-2"
+        >
+          {older ? (
+            <Link href={older.href} className="group flex flex-col gap-1">
+              <span className="font-mono text-[11px] tracking-widest text-slate-400 uppercase">
+                <span className="inline-block transition-transform duration-300 group-hover:-translate-x-1">
+                  ←
+                </span>{' '}
+                Older
+              </span>
+              <span className="font-medium tracking-tight text-slate-950">
+                {older.meta.title}
+              </span>
+            </Link>
+          ) : (
+            <span />
+          )}
+          {newer && (
+            <Link
+              href={newer.href}
+              className="group flex flex-col gap-1 sm:text-right"
+            >
+              <span className="font-mono text-[11px] tracking-widest text-slate-400 uppercase">
+                Newer{' '}
+                <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">
+                  →
+                </span>
+              </span>
+              <span className="font-medium tracking-tight text-slate-950">
+                {newer.meta.title}
+              </span>
+            </Link>
+          )}
+        </nav>
+      )}
     </article>
   );
 }
