@@ -15,6 +15,12 @@ The property that matters downstream: the cached tensors for a token depend only
 
 From this, one brutal rule: **the cache is valid up to the first token that differs, and dead after it.** Change one character at position 500 of your system prompt and you just re-bought everything from position 500 on.
 
+Don't take my word for it — break the cache yourself:
+
+<KvCacheDemo />
+
+Notice the asymmetry. Editing the timestamp near the top re-bills nearly the whole request, more than ten times the warm price. Appending the same information at the *end* costs almost nothing. Same content, same model — the only difference is *where* the change landed in the prefix.
+
 ## Everything downstream of one rule
 
 That single invalidation rule silently dictates how every good agent harness is built. Once you know it, you see it everywhere:

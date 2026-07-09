@@ -5,6 +5,7 @@ import { JetBrains_Mono, Newsreader } from 'next/font/google';
 import localFont from 'next/font/local';
 import { NavLink } from './components/nav-link';
 import { LocalTime } from './components/local-time';
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site';
 
 const saans = localFont({
   src: '../public/fonts/saans-font.woff2',
@@ -28,14 +29,31 @@ const newsreader = Newsreader({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Vivekananda Reddy',
-    template: '%s — Vivekananda Reddy',
+    default: SITE_NAME,
+    template: `%s — ${SITE_NAME}`,
   },
-  description:
-    'Software Developer | Passionate about code, design & problem-solving | Germany.',
+  description: SITE_DESCRIPTION,
   icons: {
     icon: '/favicon.ico',
+  },
+  openGraph: {
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    creator: '@vvkrdy',
+  },
+  alternates: {
+    types: {
+      'application/rss+xml': '/feed.xml',
+    },
   },
 };
 

@@ -3,6 +3,9 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import { getAllPostPaths, getPostBySlug } from '@/lib/articles';
+import { KvCacheDemo } from '@/app/components/kv-cache-demo';
+
+const mdxComponents = { KvCacheDemo };
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -23,6 +26,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: post.meta.title,
     description: post.meta.summary,
+    openGraph: {
+      title: post.meta.title,
+      description: post.meta.summary,
+      type: 'article',
+      publishedTime: post.date,
+      url: post.href,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.meta.title,
+      description: post.meta.summary,
+    },
   };
 }
 
@@ -79,7 +94,7 @@ export default async function PostPage({ params }: Props) {
         className="reveal prose prose-slate prose-lg max-w-none prose-headings:font-medium prose-headings:tracking-tight prose-a:underline prose-a:decoration-slate-300 prose-a:underline-offset-4 hover:prose-a:decoration-slate-950 prose-code:rounded prose-code:bg-slate-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-sm prose-code:font-normal prose-code:before:content-none prose-code:after:content-none prose-pre:rounded-xl prose-pre:bg-slate-950"
         style={{ '--stagger': 2 } as React.CSSProperties}
       >
-        <MDXRemote source={post.content} />
+        <MDXRemote source={post.content} components={mdxComponents} />
       </div>
     </article>
   );
