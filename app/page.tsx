@@ -10,28 +10,32 @@ const projects: {
   image: string;
 }[] = [
   {
-    title: 'Startup Directory',
-    href: 'https://github.com/VivekanandaReddy3/SU_Directory',
-    description: 'Pitch and explore startup ideas collaboratively.',
-    image: '/sud.png',
+    title: 'Gründbar',
+    href: 'https://gruendbar.vivekreddy.de',
+    description:
+      'A startup idea directory — pitch in markdown, collect upvotes, find teammates. Next.js, Sanity, GitHub OAuth.',
+    image: '/gruendbar.png',
   },
   {
-    title: 'Quotient',
-    href: 'https://github.com/VivekanandaReddy3/Quotient',
-    description: 'Modern admin dashboard with GraphQL and Refine.',
-    image: '/quotient.png',
+    title: 'Stromlinie',
+    href: 'https://stromlinie.vivekreddy.de',
+    description:
+      'Germany’s power grid, live — generation mix, day-ahead prices and renewable share from open data.',
+    image: '/stromlinie.png',
   },
   {
-    title: 'SalesLytic',
-    href: 'https://github.com/VivekanandaReddy3/Saleslytic',
-    description: 'Sales insights dashboard using Tableau and SQL.',
-    image: '/saleslytic.png',
+    title: 'Fließband',
+    href: 'https://fliessband.vivekreddy.de',
+    description:
+      'A data pipeline that monitors itself — GitHub Actions cron, SQLite-in-git, quality checks, freshness SLO.',
+    image: '/fliessband.png',
   },
   {
-    title: 'AdminPit',
-    href: 'https://github.com/VivekanandaReddy3/AdminPit',
-    description: 'Admin dashboard with charts and management tools.',
-    image: '/adminpit.png',
+    title: 'Klartext',
+    href: 'https://klartext.vivekreddy.de',
+    description:
+      'OCR that never uploads your document — Tesseract WASM in the browser with a visible preprocessing pipeline.',
+    image: '/klartext.png',
   },
 ];
 
@@ -173,7 +177,7 @@ function ProjectCard({
           <span className="h-2 w-2 rounded-full bg-slate-200" />
           <span className="h-2 w-2 rounded-full bg-slate-200" />
           <span className="ml-2 hidden truncate font-mono text-[9px] text-slate-300 sm:block">
-            {project.title.toLowerCase().replace(/\s/g, '')}.app
+            {project.href ? new URL(project.href).hostname : ''}
           </span>
         </div>
         <div className="relative flex-1 bg-slate-200">

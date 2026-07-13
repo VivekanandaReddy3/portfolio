@@ -91,7 +91,8 @@ export default function Information() {
               Building
             </dt>
             <dd className="text-slate-700">
-              A platform for startups to pitch ideas and team up
+              A small fleet of live products — Gründbar, Stromlinie,
+              Fließband, Klartext
             </dd>
           </div>
         </dl>
