@@ -5,6 +5,25 @@ export const metadata: Metadata = {
   title: 'Information',
 };
 
+const dailyStack = [
+  'Kubernetes',
+  'RKE2',
+  'Terraform',
+  'Harvester',
+  'Ansible',
+  'ArgoCD',
+  'Vault',
+  'External Secrets',
+  'cert-manager',
+  'Prometheus',
+  'Grafana',
+  'Alertmanager',
+  'OpenSearch',
+  'OpenTelemetry',
+  'GitLab CI',
+  'Ceph',
+];
+
 export default function Information() {
   return (
     <section className="container-page">
@@ -24,33 +43,33 @@ export default function Information() {
         style={{ '--stagger': 1 } as React.CSSProperties}
       >
         <p>
-          Hey, I’m Vivekananda Reddy Godala, a computer and data science grad
-          from India now chasing my master’s in Germany. I’m all about building
-          tech that solves real problems, and I’m hungry to learn and grow in
-          the process.
+          I’m Vivekananda Reddy Godala — a DevOps working student at 1&amp;1
+          Mail &amp; Media in Karlsruhe and an M.Sc. Web &amp; Data Science
+          student at the University of Koblenz. I moved to Germany from
+          Hyderabad in 2024, and I’ve been building things nonstop since.
         </p>
         <p>
-          Back at Malla Reddy University, I was the first president of the
-          Technical Club, running 30+ events, including 9 national ones with
-          86% turnout. Leading teams taught me how to deliver while soaking up
-          new skills.
+          At work I help build log-ingestion pipelines and the Kubernetes
+          platform underneath them. In practice that means standing up RKE2
+          clusters end to end — Terraform’d VMs on Harvester, Ansible for
+          cluster bring-up, Vault with External Secrets and cert-manager for
+          the trust layer, ArgoCD for GitOps, Ceph for storage — and wiring
+          the observability that keeps it all honest: Prometheus,
+          Alertmanager, Grafana, OpenSearch and OpenTelemetry pipelines.
         </p>
         <p>
-          I’ve worked on a platform for real-time online bidding and a
-          dashboard to help businesses spot sales trends and make better calls.
-          I also freelanced, helping an education group launch their online
-          presence.
+          Outside work I ship small, opinionated products — four of them are
+          live on the <Link href="/">home page</Link> — and I have a soft
+          spot for language engineering: a Racket{' '}
+          <code>#lang</code> that makes LLM prompt templates compile-time
+          checked, and a language server for a teaching language that’s
+          being upstreamed into the softlang/yas repository.
         </p>
         <p>
-          Currently, I’m building a full-stack application for startups to
-          pitch ideas and team up, learning tons about collaboration and
-          innovation every day.
-        </p>
-        <p>
-          Since September 2025, I’m a working student at 1&amp;1 Mail &amp;
-          Media in Karlsruhe, doing DevOps and cloud automation — learning how
-          software runs reliably at real scale. Got something interesting?
-          Feel free to reach out to me here: <br />
+          Before Germany: freelance work that shipped a school platform used
+          by real parents and teachers, a software &amp; data internship, and
+          founding my university’s technical club. If any of this sounds like
+          your kind of engineering, say hallo:{' '}
           <Link
             href="mailto:vivekanandareddygodala@gmail.com"
             className="link-underline font-normal !no-underline text-slate-950"
@@ -62,8 +81,27 @@ export default function Information() {
       </div>
 
       <div
-        className="reveal mt-12"
+        className="reveal mt-10"
         style={{ '--stagger': 2 } as React.CSSProperties}
+      >
+        <p className="mb-4 font-mono text-[11px] tracking-[0.2em] text-slate-400 uppercase">
+          Daily stack
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {dailyStack.map((tool) => (
+            <span
+              key={tool}
+              className="rounded-full border border-slate-200 px-3 py-1 font-mono text-[11px] text-slate-600"
+            >
+              {tool}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div
+        className="reveal mt-12"
+        style={{ '--stagger': 3 } as React.CSSProperties}
       >
         <p className="mb-4 font-mono text-[11px] tracking-[0.2em] text-slate-400 uppercase">
           Now
@@ -102,7 +140,7 @@ export default function Information() {
         href="/resume.pdf"
         target="_blank"
         className="group reveal mt-10 mb-8 inline-block font-mono text-sm font-medium text-slate-500 transition-colors hover:text-slate-950"
-        style={{ '--stagger': 3 } as React.CSSProperties}
+        style={{ '--stagger': 4 } as React.CSSProperties}
       >
         Download resume{' '}
         <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">

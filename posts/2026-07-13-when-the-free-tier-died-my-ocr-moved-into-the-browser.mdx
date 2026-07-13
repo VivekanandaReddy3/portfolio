@@ -1,0 +1,45 @@
+---
+title: 'When the free tier died, my OCR moved into the browser'
+summary: 'Klartext was built as a Dockerized Python service — until Hugging Face put Docker Spaces behind a paywall mid-project. The forced rewrite produced a better architecture.'
+---
+
+[Klartext](https://klartext.vivekreddy.de) reads printed documents — photo
+in, plain text out, with the preprocessing pipeline made visible. I built
+it the respectable way first: FastAPI, Tesseract and OpenCV in a Docker
+container, tested end to end locally, ready for a free Hugging Face Space.
+
+Then I opened the Space creation page and found a new banner: Docker
+Spaces now require a paid plan. My deployment target had vanished between
+design and deploy.
+
+## The rewrite that was an upgrade
+
+The forced question — *where else can inference run for free?* — had an
+answer hiding in plain sight: **on the user's machine**. Tesseract
+compiles to WebAssembly, so the recognition engine can run inside the
+browser tab itself. I rewrote the pipeline client-side: preprocessing on a
+`<canvas>` (grayscale, then Otsu binarization implemented from scratch —
+it's thirty lines and worth understanding), then `tesseract.js` for
+recognition with per-word confidences.
+
+What started as a workaround turned out to be the better architecture:
+
+- **Privacy stopped being a promise and became a property.** Your document
+  isn't "handled securely" — it never leaves your device, because there is
+  no server to send it to.
+- **No cold starts, no hosting bill, no ops.** A static page does inference.
+- The tested Docker container didn't die — it lives in the repo as a
+  documented self-host option, with the deeper OpenCV pipeline (denoising,
+  automatic deskew) that the browser version doesn't need for its job.
+
+## What I actually learned
+
+The OCR lesson: preprocessing dominates. The same engine that shrugs at a
+raw phone photo reads near-perfectly after binarization — which is why
+Klartext shows you every stage instead of hiding them behind a spinner.
+
+The engineering lesson is the one I'll retell in interviews: dependencies
+on someone else's pricing page are architecture decisions too. When the
+ground moves, the ability to re-plan — and to recognize when the
+workaround is actually the better design — matters more than the original
+plan ever did.

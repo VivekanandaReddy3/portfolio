@@ -1,0 +1,49 @@
+---
+title: 'SQLite in git is a real architecture'
+summary: 'Fließband stores its database in the repo and lets GitHub Actions be its scheduler, its ops log and its deploy pipeline. Here is why that is a decision, not a hack.'
+---
+
+[Fließband](https://fliessband.vivekreddy.de) is a data pipeline that ingests
+German energy and weather data every day. When I designed it, the reflexive
+architecture was obvious: a Postgres instance, a worker somewhere, maybe a
+queue. The stack every tutorial reaches for.
+
+Then I did the arithmetic. The pipeline produces about **ten rows a day**.
+
+## Right-sizing is a skill
+
+For ten rows a day, a database server is pure overhead: something to host,
+patch, back up, and pay for — with none of its strengths (concurrency,
+ad-hoc queries at scale) ever exercised. So Fließband commits its SQLite
+file straight into the repository, and a GitHub Actions cron job is the
+entire runtime:
+
+1. At 05:30 UTC, Actions runs the Python ingest
+2. It fetches both sources, runs data-quality checks, and **upserts** —
+   every row is keyed by date, so any run can be repeated safely
+3. It commits the updated database and JSON snapshots back to the repo
+4. The push triggers the status page to redeploy with fresh data
+
+The side effects are the best part. Every pipeline run is a **public,
+diffable commit** — you can `git log` the data itself. The Actions history
+doubles as the uptime record. A bad ingest can be reverted like any bad
+commit. There is nothing to babysit, and the hosting bill is zero, forever.
+
+## Failure modes you can see
+
+The pipeline checks its own work: plausibility bounds on every row, plus a
+freshness SLO — yesterday's data must be present, or the run reports itself
+as degraded on the [status page](https://fliessband.vivekreddy.de). During
+the initial backfill, the upstream API rate-limited me and one month of
+prices went missing. The chart shows the gap. I could have interpolated it
+away; a pipeline that hides its failures is a pipeline you can't trust.
+
+## Where this pattern ends
+
+Honesty about the limits, because that's the first interview question:
+git-as-database stops making sense with write concurrency, with data too
+large to diff meaningfully, with anything private, or with consumers that
+need sub-daily freshness. The point isn't that everyone should commit
+databases to git. The point is that **architecture should be sized to the
+problem, not to the tutorial** — and knowing when a pattern breaks is part
+of using it.
