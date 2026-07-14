@@ -43,7 +43,7 @@ const experience: {
     period: 'Sep 2025 — Present',
     current: true,
     summary:
-      'Building log-ingestion pipelines and the Kubernetes platform they run on — standing up RKE2 clusters end to end, from Terraform’d VMs to GitOps-managed workloads with full observability.',
+      'Part of the team building log-ingestion pipelines and the Kubernetes platform they run on — my share ranges from Terraform’d VMs and RKE2 cluster bring-up to GitOps and observability.',
     tags: ['Kubernetes', 'Terraform', 'Ansible', 'ArgoCD', 'Observability'],
   },
   {
@@ -157,27 +157,28 @@ export default function Information() {
         style={{ '--stagger': 1 } as React.CSSProperties}
       >
         <p>
-          I’m Vivekananda Reddy Godala — a DevOps working student at 1&amp;1
-          Mail &amp; Media in Karlsruhe and an M.Sc. Web &amp; Data Science
-          student at the University of Koblenz. I moved to Germany from
-          Hyderabad in 2024, and I’ve been building things nonstop since.
+          I’m Vivekananda Reddy Godala — Vivek. I live in Karlsruhe, work as
+          a DevOps working student at 1&amp;1 Mail &amp; Media, and study
+          Web &amp; Data Science at the University of Koblenz. At work I
+          help my team keep log pipelines and Kubernetes clusters running —
+          the kind of engineering where you notice everything you took for
+          granted the moment it breaks.
         </p>
         <p>
-          At work I help build log-ingestion pipelines and the Kubernetes
-          platform underneath them. In practice that means standing up RKE2
-          clusters end to end — Terraform’d VMs on Harvester, Ansible for
-          cluster bring-up, Vault with External Secrets and cert-manager for
-          the trust layer, ArgoCD for GitOps, Ceph for storage — and wiring
-          the observability that keeps it all honest: Prometheus,
-          Alertmanager, Grafana, OpenSearch and OpenTelemetry pipelines.
+          What actually drives me is taking an idea the whole way: from “what
+          if” to something with a URL that strangers can use. That’s why my
+          evenings produce things like a startup-idea directory, a live map
+          of Germany’s power grid, and OCR that runs entirely in your
+          browser — each one an excuse to learn a corner of the stack
+          properly. Lately the rabbit hole is language engineering: I’ve
+          built a small language and a language server, and I’m fascinated
+          by how much a compiler can catch before a human has to.
         </p>
         <p>
-          Outside work I ship small, opinionated products — they live on the{' '}
-          <Link href="/">home page</Link> — and I have a soft spot for
-          language engineering: a Racket <code>#lang</code> that makes LLM
-          prompt templates compile-time checked, and a language server for a
-          teaching language that’s being upstreamed into the softlang/yas
-          repository.
+          When I’m not shipping something, I’m usually writing about what I
+          learned on the <Link href="/posts">notes page</Link>, or slowly
+          winning my fight with the German language — B1 in progress,
+          Anmeldung vocabulary already battle-tested.
         </p>
         <p>
           If any of this sounds like your kind of engineering, say hallo:{' '}

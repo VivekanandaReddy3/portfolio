@@ -126,7 +126,7 @@ export default async function Page() {
           >
             Hallo, I’m Vivek.
             <span className="mt-3 block font-serif text-2xl font-normal tracking-normal text-slate-500 italic md:text-3xl">
-              a DevOps engineer from India, based in Karlsruhe, Germany.
+              a software engineer based in Karlsruhe, Germany.
             </span>
           </h1>
 
@@ -134,12 +134,13 @@ export default async function Page() {
             className="reveal mb-4 max-w-2xl text-lg leading-relaxed text-slate-700 md:text-xl"
             style={{ '--stagger': 2 } as React.CSSProperties}
           >
-            I build and look after the infrastructure software runs on. Right
-            now that’s at 1&amp;1 Mail &amp; Media, working on the Kubernetes
-            platform and log pipelines behind one of Germany’s largest mail
-            providers — alongside my master’s in Web &amp; Data Science.
-            Before Germany, I freelanced in India and shipped a school
-            platform that parents and teachers still use.
+            I like building things end to end — data, backends, interfaces
+            and the infrastructure underneath. Right now I’m at 1&amp;1
+            Mail &amp; Media, where I work with the team running log
+            pipelines and Kubernetes platforms behind one of Germany’s
+            largest mail providers, alongside my master’s in Web &amp; Data
+            Science. Before that, I freelanced and shipped a school platform
+            that parents and teachers still use.
           </p>
 
           <div
@@ -181,33 +182,46 @@ export default async function Page() {
           ))}
         </div>
 
-        <ScrollReveal className="mt-8">
-          <p className="max-w-3xl text-sm leading-relaxed text-slate-500">
-            <span className="font-mono text-[11px] tracking-[0.15em] text-slate-400 uppercase">
-              Off the beaten path —{' '}
-            </span>
-            I also build languages and their tooling:{' '}
+        <div className="mt-10 flex flex-col">
+          <ScrollReveal>
             <Link
               href="https://github.com/VivekanandaReddy3/sle-prompt-pattern"
               target="_blank"
               rel="noopener noreferrer"
-              className="link-underline font-medium text-slate-700"
+              className="group -mx-4 flex flex-col gap-1 rounded-xl px-4 py-4 transition-colors duration-300 hover:bg-slate-100"
             >
-              prompt-pattern
+              <h3 className="font-mono text-sm font-semibold text-slate-800">
+                prompt-pattern
+                <span className="ml-1.5 inline-block text-slate-300 transition-all duration-300 group-hover:translate-x-1 group-hover:text-slate-600">
+                  ↗
+                </span>
+              </h3>
+              <p className="max-w-2xl text-sm leading-relaxed text-slate-500">
+                A Racket #lang that makes LLM prompt templates compile-time
+                checked — an undeclared slot fails the build.
+              </p>
             </Link>
-            , a Racket <code className="font-mono text-xs">#lang</code> that
-            makes LLM prompt templates compile-time checked, and a{' '}
+          </ScrollReveal>
+          <ScrollReveal delay={80}>
             <Link
               href="https://github.com/VivekanandaReddy3/sle-bipl-lsp"
               target="_blank"
               rel="noopener noreferrer"
-              className="link-underline font-medium text-slate-700"
+              className="group -mx-4 flex flex-col gap-1 rounded-xl px-4 py-4 transition-colors duration-300 hover:bg-slate-100"
             >
-              language server for BIPL
-            </Link>{' '}
-            — live type checking over LSP, being upstreamed into softlang/yas.
-          </p>
-        </ScrollReveal>
+              <h3 className="font-mono text-sm font-semibold text-slate-800">
+                bipl-lsp
+                <span className="ml-1.5 inline-block text-slate-300 transition-all duration-300 group-hover:translate-x-1 group-hover:text-slate-600">
+                  ↗
+                </span>
+              </h3>
+              <p className="max-w-2xl text-sm leading-relaxed text-slate-500">
+                A language server with live type checking for a teaching
+                language — being upstreamed into softlang/yas.
+              </p>
+            </Link>
+          </ScrollReveal>
+        </div>
       </section>
 
       {latestPosts.length > 0 && (

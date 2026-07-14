@@ -92,23 +92,23 @@ export default function RootLayout({
         <footer className="container-page mt-24 pb-10">
           <hr className="border-slate-200" />
 
-          <div className="flex flex-col gap-6 py-14 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="font-serif text-2xl text-slate-500 italic md:text-3xl">
-                Have an idea worth building?
-              </p>
-              <Link
-                href="mailto:vivekanandareddygodala@gmail.com"
-                className="link-underline mt-2 inline-block text-xl font-medium tracking-tight text-slate-950 md:text-2xl"
-              >
-                vivekanandareddygodala@gmail.com
-              </Link>
-            </div>
-            <div className="flex flex-col gap-1 font-mono text-xs text-slate-500 md:items-end">
-              <span>
-                Karlsruhe, Germany · <LocalTime />
-              </span>
-              <div className="flex gap-4">
+          <div className="py-16">
+            <p className="font-serif text-2xl text-slate-500 italic md:text-3xl">
+              Have an idea worth building?
+            </p>
+            <Link
+              href="mailto:vivekanandareddygodala@gmail.com"
+              className="link-underline mt-3 inline-block text-xl font-medium tracking-tight text-slate-950 md:text-2xl"
+            >
+              vivekanandareddygodala@gmail.com
+            </Link>
+          </div>
+
+          <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 border-t border-slate-100 py-6 font-mono text-xs text-slate-500">
+            <span className="whitespace-nowrap">
+              Karlsruhe, Germany · <LocalTime />
+            </span>
+            <div className="flex gap-6">
                 <Link
                   href="https://github.com/vivekanandareddy3"
                   target="_blank"
@@ -133,7 +133,6 @@ export default function RootLayout({
                 >
                   X
                 </Link>
-              </div>
             </div>
           </div>
 
