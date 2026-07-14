@@ -39,73 +39,6 @@ const projects: {
   },
 ];
 
-const experience: {
-  company: string;
-  role: string;
-  location: string;
-  period: string;
-  current?: boolean;
-  summary: string;
-  tags: string[];
-}[] = [
-  {
-    company: '1&1 Mail & Media',
-    role: 'Working Student — DevOps & Cloud Automation',
-    location: 'Karlsruhe',
-    period: 'Sep 2025 — now',
-    current: true,
-    summary:
-      'Log-ingestion pipelines and the Kubernetes platform they run on — from Terraform’d VMs to RKE2 clusters with GitOps, secrets management and full observability.',
-    tags: ['Kubernetes', 'Terraform', 'Ansible', 'ArgoCD', 'Observability'],
-  },
-  {
-    company: 'SNT School',
-    role: 'Freelance Software Development Engineer',
-    location: 'Hyderabad',
-    period: 'Mar — Oct 2024',
-    summary:
-      'Cross-platform school app with role-based access — React Native front, Node.js/Prisma/MySQL on AWS behind it.',
-    tags: ['React Native', 'Node.js', 'AWS'],
-  },
-  {
-    company: 'Sashi Infotech',
-    role: 'Software & Data Intern',
-    location: 'Hyderabad',
-    period: 'May 2023 — Mar 2024',
-    summary:
-      'Frontend and backend work on web applications, plus automated data pipelines in Snowflake.',
-    tags: ['Snowflake', 'SQL'],
-  },
-  {
-    company: 'Malla Reddy University',
-    role: 'President, Technical Club',
-    location: 'Hyderabad',
-    period: '2022 — 2024',
-    summary:
-      'First president — ran 30+ technical events with a record 86% student participation.',
-    tags: ['Leadership'],
-  },
-];
-
-const languageWork: {
-  href: string;
-  title: string;
-  description: string;
-}[] = [
-  {
-    title: 'prompt-pattern',
-    href: 'https://github.com/VivekanandaReddy3/sle-prompt-pattern',
-    description:
-      'A Racket #lang where LLM prompt templates are compile-time checked — an undeclared slot fails the build, not the 2 a.m. API call.',
-  },
-  {
-    title: 'BIPL language server',
-    href: 'https://github.com/VivekanandaReddy3/sle-bipl-lsp',
-    description:
-      'A language server and VS Code client for BIPL, a small imperative language — live type checking and use-before-assignment analysis over LSP (Python + pygls). Being upstreamed into the softlang/yas language zoo.',
-  },
-];
-
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
     <p className="mb-3 font-mono text-[11px] tracking-[0.2em] text-slate-400 uppercase">
@@ -170,7 +103,7 @@ const formatDate = (date: string) =>
   }).format(new Date(date));
 
 export default async function Page() {
-  const latestPosts = (await getAllPosts({})).slice(0, 2);
+  const latestPosts = (await getAllPosts({})).slice(0, 3);
 
   return (
     <>
@@ -193,7 +126,7 @@ export default async function Page() {
           >
             Hallo, I’m Vivek.
             <span className="mt-3 block font-serif text-2xl font-normal tracking-normal text-slate-500 italic md:text-3xl">
-              I keep clusters healthy by day and ship products by night.
+              a DevOps engineer from India, based in Karlsruhe, Germany.
             </span>
           </h1>
 
@@ -201,8 +134,12 @@ export default async function Page() {
             className="reveal mb-4 max-w-2xl text-lg leading-relaxed text-slate-700 md:text-xl"
             style={{ '--stagger': 2 } as React.CSSProperties}
           >
-            DevOps working student at 1&amp;1, M.Sc. Web &amp; Data Science at
-            Koblenz — and builder of four live products you can click below.
+            I build and look after the infrastructure software runs on. Right
+            now that’s at 1&amp;1 Mail &amp; Media, working on the Kubernetes
+            platform and log pipelines behind one of Germany’s largest mail
+            providers — alongside my master’s in Web &amp; Data Science.
+            Before Germany, I freelanced in India and shipped a school
+            platform that parents and teachers still use.
           </p>
 
           <div
@@ -230,7 +167,7 @@ export default async function Page() {
 
       <section className="container-wide mt-16">
         <ScrollReveal>
-          <SectionLabel>Selected work — all live</SectionLabel>
+          <SectionLabel>Selected work</SectionLabel>
           <h2 className="mb-2 text-2xl font-medium tracking-tight text-slate-950">
             Things I’ve built
           </h2>
@@ -243,103 +180,51 @@ export default async function Page() {
             </ScrollReveal>
           ))}
         </div>
-      </section>
 
-      <section className="container-wide mt-16">
-        <ScrollReveal>
-          <SectionLabel>Experience</SectionLabel>
-          <h2 className="text-2xl font-medium tracking-tight text-slate-950">
-            Where I’ve worked
-          </h2>
+        <ScrollReveal className="mt-8">
+          <p className="max-w-3xl text-sm leading-relaxed text-slate-500">
+            <span className="font-mono text-[11px] tracking-[0.15em] text-slate-400 uppercase">
+              Off the beaten path —{' '}
+            </span>
+            I also build languages and their tooling:{' '}
+            <Link
+              href="https://github.com/VivekanandaReddy3/sle-prompt-pattern"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-underline font-medium text-slate-700"
+            >
+              prompt-pattern
+            </Link>
+            , a Racket <code className="font-mono text-xs">#lang</code> that
+            makes LLM prompt templates compile-time checked, and a{' '}
+            <Link
+              href="https://github.com/VivekanandaReddy3/sle-bipl-lsp"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-underline font-medium text-slate-700"
+            >
+              language server for BIPL
+            </Link>{' '}
+            — live type checking over LSP, being upstreamed into softlang/yas.
+          </p>
         </ScrollReveal>
-
-        <div className="mt-6">
-          {experience.map((job, i) => (
-            <ScrollReveal key={job.company} delay={i * 60}>
-              <article className="grid gap-1 border-t border-slate-200 py-5 md:grid-cols-[11rem_1fr_auto] md:gap-6">
-                <p className="font-mono text-xs leading-6 text-slate-400">
-                  {job.period}
-                  {job.current && (
-                    <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] tracking-wider text-emerald-700 uppercase">
-                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                      now
-                    </span>
-                  )}
-                </p>
-                <div className="min-w-0">
-                  <h3 className="font-semibold tracking-tight text-slate-950">
-                    {job.role}
-                  </h3>
-                  <p className="text-sm text-slate-500">
-                    {job.company} · {job.location}
-                  </p>
-                  <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-slate-600">
-                    {job.summary}
-                  </p>
-                </div>
-                <div className="mt-2 flex flex-wrap gap-1.5 md:mt-0 md:max-w-[14rem] md:justify-end">
-                  {job.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="h-fit rounded-full border border-slate-200 px-2.5 py-0.5 font-mono text-[10px] text-slate-500"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
-
-      <section className="container-wide mt-16">
-        <ScrollReveal>
-          <SectionLabel>Language engineering</SectionLabel>
-          <h2 className="text-2xl font-medium tracking-tight text-slate-950">
-            Small languages, real tooling
-          </h2>
-        </ScrollReveal>
-
-        <div className="mt-2 grid gap-x-10 md:grid-cols-2">
-          {languageWork.map((item, i) => (
-            <ScrollReveal key={item.title} delay={i * 80}>
-              <Link
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group -mx-4 flex h-full flex-col gap-1 rounded-xl px-4 py-5 transition-colors duration-300 hover:bg-slate-100"
-              >
-                <h3 className="font-mono text-sm font-semibold text-slate-950">
-                  {item.title}
-                  <span className="ml-1.5 inline-block text-slate-300 transition-all duration-300 group-hover:translate-x-1 group-hover:text-slate-600">
-                    ↗
-                  </span>
-                </h3>
-                <p className="text-sm leading-relaxed text-slate-600">
-                  {item.description}
-                </p>
-              </Link>
-            </ScrollReveal>
-          ))}
-        </div>
       </section>
 
       {latestPosts.length > 0 && (
-        <section className="container-wide mt-16">
+        <section className="container-page mt-16">
           <ScrollReveal>
             <SectionLabel>Writing</SectionLabel>
-            <h2 className="text-2xl font-medium tracking-tight text-slate-950">
+            <h2 className="mb-2 text-2xl font-medium tracking-tight text-slate-950">
               Recent notes
             </h2>
           </ScrollReveal>
 
-          <div className="mt-2 grid gap-x-10 md:grid-cols-2">
+          <div className="mt-4 flex flex-col">
             {latestPosts.map((post, i) => (
               <ScrollReveal key={post.slug} delay={i * 80}>
                 <Link
                   href={post.href}
-                  className="group -mx-4 flex h-full flex-col gap-1 rounded-xl px-4 py-5 transition-colors duration-300 hover:bg-slate-100"
+                  className="group -mx-4 flex flex-col gap-1 rounded-xl px-4 py-5 transition-colors duration-300 hover:bg-slate-100"
                 >
                   <p className="font-mono text-xs text-slate-400">
                     <time dateTime={post.date}>{formatDate(post.date)}</time>
@@ -352,6 +237,11 @@ export default async function Page() {
                       →
                     </span>
                   </h3>
+                  {post.meta.summary && (
+                    <p className="max-w-2xl text-sm leading-relaxed text-slate-500">
+                      {post.meta.summary}
+                    </p>
+                  )}
                 </Link>
               </ScrollReveal>
             ))}

@@ -1,24 +1,47 @@
-# My Professional Portfolio
+# Vivek Reddy — Portfolio
 
-✨ **About This Project**  
-This repository currently serves as the foundation for my upcoming professional portfolio website. I'm actively building it using Next.js to showcase my skills, projects, and journey.
+A polished personal website and digital garden for sharing my work, ideas, and technical writing. This project brings together my projects, experience, and thoughts on software, DevOps, and building products that are useful in the real world.
 
----
+## What this site includes
 
-🚀 **Technologies I'm Using**  
-- Next.js  
-- Tailwind CSS
+- A clean portfolio homepage with featured projects and experience
+- A writing section for technical posts and long-form ideas
+- A simple contact and information hub for reaching out
+- A modern, fast-first experience built with Next.js and TypeScript
+
+## Tech stack
+
+- Next.js 15
 - TypeScript
+- Tailwind CSS
+- MDX-based blog/posts
+- Gray matter for content metadata
 
----
+## Local development
 
-🚧 **Status**  
-This portfolio is currently under construction! Please check back soon for updates.
+Install dependencies:
 
----
+```bash
+npm install
+```
 
-👋 **Connect with Me**  
-In the meantime, feel free to connect with me on:  
+Start the development server:
 
-- GitHub: [https://github.com/VivekanandaReddy3](https://github.com/VivekanandaReddy3)  
-- LinkedIn: [https://www.linkedin.com/in/vivekananda-reddy/](https://www.linkedin.com/in/vivekananda-reddy/)
+```bash
+npm run dev
+```
+
+Then open http://localhost:3000 in your browser.
+
+## Build for production
+
+```bash
+npm run build
+```
+
+## Connect
+
+- GitHub: https://github.com/VivekanandaReddy3
+- LinkedIn: https://www.linkedin.com/in/vivekananda-reddy/
+
+This site is a reflection of how I think about building software: practical, thoughtful, and grounded in real systems.
